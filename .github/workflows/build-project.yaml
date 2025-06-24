@@ -187,11 +187,11 @@ jobs:
           : Set Up Environment 🔧
           if [[ "${RUNNER_DEBUG}" ]]; then set -x; fi
 
-          read -r product_name product_version <<< \
-            "$(jq -r '. | {name, version} | join(" ")' buildspec.json)"
+          read -r product_name product_versionMajor product_versionMinor product_versionPatch <<< \
+            "$(jq -r '. | {name, versionMajor, versionMinor, versionPatch} | join(" ")' buildspec.json)"
 
           echo "pluginName=${product_name}" >> $GITHUB_OUTPUT
-          echo "pluginVersion=${product_version}" >> $GITHUB_OUTPUT
+          echo "pluginVersion=${product_versionMajor}.${product_versionMinor}.${product_versionPatch}" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v4
         id: ccache-cache
