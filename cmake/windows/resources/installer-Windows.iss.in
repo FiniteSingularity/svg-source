@@ -32,7 +32,7 @@ Source: ".\LICENSE"; Flags: dontcopy
 
 [Icons]
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{#MyAppName}-{uninstallexe}"
 
 [Code]
 procedure InitializeWizard();
