@@ -309,7 +309,7 @@ jobs:
       - name: Compress Plug-In
         if: success()
         run: |
-          Compress-Archive -Path package/* -Destination "archive/${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64.zip"
+          Compress-Archive -Path package/${{ env.PLUGIN_NAME }}/* -Destination "archive/${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64.zip"
       - name: "Package Installer (Compile)"
         run: |
           & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' /O".\archive" /F"${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64-Installer" /Qp ".\installer.iss"
@@ -373,11 +373,11 @@ jobs:
       - name: Code Sign Library
         if: success()
         run: |
-          & '.\smartcardtools\x86\ScSignTool.exe' -pin ${{ secrets.SIGNING_KEY_PIN }} sign /fd sha256 /tr http://ts.ssl.com /td sha256 /n '${{ secrets.SIGNING_ORG }}' .\package\obs-plugins\64bit\${{ env.PLUGIN_NAME }}.dll
+          & '.\smartcardtools\x86\ScSignTool.exe' -pin ${{ secrets.SIGNING_KEY_PIN }} sign /fd sha256 /tr http://ts.ssl.com /td sha256 /n '${{ secrets.SIGNING_ORG }}' .\package\${{ env.PLUGIN_NAME }}\obs-plugins\64bit\${{ env.PLUGIN_NAME }}.dll
       - name: Compress Plug-In
         if: success()
         run: |
-          Compress-Archive -Path package/* -Destination "archive/${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64.zip"
+          Compress-Archive -Path package/${{ env.PLUGIN_NAME }}/* -Destination "archive/${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64.zip"
       - name: "Package Installer (Compile)"
         run: |
           & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' /O".\archive" /F"${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64-Installer" /Qp ".\installer.iss"
