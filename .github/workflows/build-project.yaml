@@ -300,11 +300,13 @@ jobs:
 
           $BuildSpec = Get-Content -Path buildspec.json -Raw | ConvertFrom-Json
           $ProductName = $BuildSpec.name
-          $ProductVersion = $BuildSpec.version
+          $ProductVersionMajor = $BuildSpec.versionMajor
+          $ProductVersionMinor = $BuildSpec.versionMinor
+          $ProductVersionPatch = $BuildSpec.versionPatch
           $ShortSha = "${{ github.sha }}".SubString(0, 9)
 
           "pluginName=${ProductName}" >> $env:GITHUB_OUTPUT
-          "pluginVersion=${ProductVersion}" >> $env:GITHUB_OUTPUT
+          "pluginVersion=${ProductVersionMajor}.${ProductVersionMinor}.${ProductVersionPatch}" >> $env:GITHUB_OUTPUT
           "shortSha=${ShortSha}" >> $env:GITHUB_OUTPUT
       - name: Compress Plug-In
         if: success()
@@ -356,11 +358,13 @@ jobs:
 
           $BuildSpec = Get-Content -Path buildspec.json -Raw | ConvertFrom-Json
           $ProductName = $BuildSpec.name
-          $ProductVersion = $BuildSpec.version
+          $ProductVersionMajor = $BuildSpec.versionMajor
+          $ProductVersionMinor = $BuildSpec.versionMinor
+          $ProductVersionPatch = $BuildSpec.versionPatch
           $ShortSha = "${{ github.sha }}".SubString(0, 9)
 
           "pluginName=${ProductName}" >> $env:GITHUB_OUTPUT
-          "pluginVersion=${ProductVersion}" >> $env:GITHUB_OUTPUT
+          "pluginVersion=${ProductVersionMajor}.${ProductVersionMinor}.${ProductVersionPatch}" >> $env:GITHUB_OUTPUT
           "shortSha=${ShortSha}" >> $env:GITHUB_OUTPUT
       - name: Setup Secrets
         run: |
@@ -391,12 +395,3 @@ jobs:
         with:
           name: "${{ steps.setup.outputs.pluginName }}-${{ steps.setup.outputs.pluginVersion }}-windows-x64-${{ steps.setup.outputs.shortSha }}"
           path: archive/*
-      - name: Remove temp artifacts
-        uses: geekyeggo/delete-artifact@v5
-        with:
-          name: |
-            tmp-package
-            tmp-installer
-      - name: Cleanup
-        if: ${{ always() }}
-        run: rm -Recurse -Force ./*
