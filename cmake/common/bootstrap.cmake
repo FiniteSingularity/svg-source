@@ -51,7 +51,7 @@ string(JSON _versionMajor GET ${buildspec} versionMajor)
 string(JSON _versionMinor GET ${buildspec} versionMinor)
 string(JSON _versionPatch GET ${buildspec} versionPatch)
 string(JSON _buildNumber GET ${buildspec} buildNumber)
-set(_version "${_versionMajor}.${_versionMinor}.${_versionPatch}.${_buildNumber}")
+set(_version "${_versionMajor}.${_versionMinor}.${_versionPatch}")
 string(JSON _releaseType GET ${buildspec} releaseType)
 
 string(JSON _bundleId GET ${buildspec} platformConfig macos bundleId)
