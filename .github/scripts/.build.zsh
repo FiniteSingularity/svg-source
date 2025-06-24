@@ -189,9 +189,14 @@ ${_usage_host:-}"
   }
 
   local product_name
+  local product_versionMajor
+  local product_versionMinor
+  local product_versionPatch
   local product_version
-  read -r product_name product_version <<< \
-    "$(jq -r '. | {name, version} | join(" ")' ${buildspec_file})"
+  read -r product_name product_versionMajor product_versionMinor product_versionPatch <<< \
+    "$(jq -r '. | {name, versionMajor, versionMinor, versionPatch} | join(" ")' ${buildspec_file})"
+
+  product_version="${product_versionMajor}.${product_versionMinor}.${product_versionPatch}"
 
   pushd ${project_root}
   if (( ! (${skips[(Ie)all]} + ${skips[(Ie)build]}) )) {
