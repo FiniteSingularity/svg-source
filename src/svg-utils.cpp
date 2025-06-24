@@ -6,7 +6,8 @@
 #include <QBuffer>
 #include <QByteArray>
 
-gs_texture_t* gsTextureFromSvgPath(const char* path, int width, int height, int scale_by)
+gs_texture_t *gsTextureFromSvgPath(const char *path, int width, int height,
+				   int scale_by)
 {
 	//std::string svgPath(path);
 	int large = 1000000;
@@ -18,9 +19,11 @@ gs_texture_t* gsTextureFromSvgPath(const char* path, int width, int height, int 
 
 	QSize imageSize;
 	if (scale_by == 1) {
-		imageSize = defSize.scaled(QSize(width, large), Qt::KeepAspectRatio);
+		imageSize = defSize.scaled(QSize(width, large),
+					   Qt::KeepAspectRatio);
 	} else if (scale_by == 2) {
-		imageSize = defSize.scaled(QSize(large, height), Qt::KeepAspectRatio);
+		imageSize = defSize.scaled(QSize(large, height),
+					   Qt::KeepAspectRatio);
 	} else {
 		imageSize.setWidth(width);
 		imageSize.setHeight(height);
@@ -33,22 +36,24 @@ gs_texture_t* gsTextureFromSvgPath(const char* path, int width, int height, int 
 	svgRenderer.render(&painter);
 	painter.end();
 
-	int bytesPerLine = image.bytesPerLine();
+	int bytesPerLine = (int)image.bytesPerLine();
 	uint32_t cy = image.height();
 	uint32_t cx = image.width();
 
-	const uint8_t* ptr = image.constBits();
+	const uint8_t *ptr = image.constBits();
 
 	std::vector<uint8_t> rawData(ptr, ptr + (bytesPerLine * cy));
 
 	enum gs_color_format format = GS_RGBA;
 	obs_enter_graphics();
-	gs_texture_t* tex = gs_texture_create(cx, cy, format, 1, (const uint8_t**)&ptr, 0);
+	gs_texture_t *tex =
+		gs_texture_create(cx, cy, format, 1, (const uint8_t **)&ptr, 0);
 	obs_leave_graphics();
 	return tex;
 }
 
-gs_texture_t* gsTextureFromSvg(const char* svg, int width, int height, int scale_by)
+gs_texture_t *gsTextureFromSvg(const char *svg, int width, int height,
+			       int scale_by)
 {
 	//std::string svgPath(path);
 	int large = 1000000;
@@ -60,9 +65,11 @@ gs_texture_t* gsTextureFromSvg(const char* svg, int width, int height, int scale
 
 	QSize imageSize;
 	if (scale_by == 1) {
-		imageSize = defSize.scaled(QSize(width, large), Qt::KeepAspectRatio);
+		imageSize = defSize.scaled(QSize(width, large),
+					   Qt::KeepAspectRatio);
 	} else if (scale_by == 2) {
-		imageSize = defSize.scaled(QSize(large, height), Qt::KeepAspectRatio);
+		imageSize = defSize.scaled(QSize(large, height),
+					   Qt::KeepAspectRatio);
 	} else {
 		imageSize.setWidth(width);
 		imageSize.setHeight(height);
@@ -75,24 +82,24 @@ gs_texture_t* gsTextureFromSvg(const char* svg, int width, int height, int scale
 	svgRenderer.render(&painter);
 	painter.end();
 
-	int bytesPerLine = image.bytesPerLine();
+	int bytesPerLine = (int)image.bytesPerLine();
 	uint32_t cy = image.height();
 	uint32_t cx = image.width();
 
-	const uint8_t* ptr = image.constBits();
+	const uint8_t *ptr = image.constBits();
 
 	std::vector<uint8_t> rawData(ptr, ptr + (bytesPerLine * cy));
 
 	enum gs_color_format format = GS_RGBA;
 	obs_enter_graphics();
-	gs_texture_t* tex = gs_texture_create(cx, cy, format, 1, (const uint8_t**)&ptr, 0);
+	gs_texture_t *tex =
+		gs_texture_create(cx, cy, format, 1, (const uint8_t **)&ptr, 0);
 	obs_leave_graphics();
 	return tex;
 }
 
-
-
-uint32_t nextPowerOf2(uint32_t n) {
+uint32_t nextPowerOf2(uint32_t n)
+{
 	if (n == 0)
 		return 1;
 	// If already a power of 2, return n

@@ -3,10 +3,10 @@ on:
   workflow_call:
     outputs:
       pluginName:
-        description: 'Project name detected by parsing build spec file'
+        description: "Project name detected by parsing build spec file"
         value: ${{ jobs.check-event.outputs.pluginName }}
 env:
-  PLUGIN_NAME: obs-quick-access-utility
+  PLUGIN_NAME: svg-source
 
 jobs:
   check-event:
