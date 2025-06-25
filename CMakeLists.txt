@@ -27,32 +27,33 @@ endif()
 
 find_package(Qt6 COMPONENTS Svg Xml Widgets Core)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Svg Qt::Xml Qt6::Core Qt6::Widgets)
-target_compile_options(
-${PROJECT_NAME} PRIVATE $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-quoted-include-in-framework-header -Wno-comma>)
+target_compile_options(${PROJECT_NAME}
+                       PRIVATE $<$<C_COMPILER_ID:Clang,AppleClang>:-Wno-quoted-include-in-framework-header -Wno-comma>)
 set_target_properties(
-${PROJECT_NAME}
-PROPERTIES AUTOMOC ON
-            AUTOUIC ON
-            AUTORCC ON)
+  ${PROJECT_NAME}
+  PROPERTIES AUTOMOC ON
+             AUTOUIC ON
+             AUTORCC ON)
 
 # configure_file(${CMAKE_CURRENT_SOURCE_DIR}/version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/version.h)
 
 if(OS_WINDOWS)
-  configure_file(cmake/windows/resources/installer-Windows.iss.in "${CMAKE_CURRENT_BINARY_DIR}/installer-Windows.generated.iss")
+  configure_file(cmake/windows/resources/installer-Windows.iss.in
+                 "${CMAKE_CURRENT_BINARY_DIR}/installer-Windows.generated.iss")
 endif()
 
-target_sources(${PROJECT_NAME}
-  PRIVATE
-  src/plugin-main.cpp
-  src/obs-utils.cpp
-  src/obs-utils.hpp
-  src/svg-source.cpp
-  src/svg-source.hpp
-  src/svg-utils.cpp
-  src/svg-utils.hpp)
+target_sources(
+  ${PROJECT_NAME}
+  PRIVATE src/plugin-main.cpp
+          src/obs-utils.cpp
+          src/obs-utils.hpp
+          src/svg-source.cpp
+          src/svg-source.hpp
+          src/svg-utils.cpp
+          src/svg-utils.hpp)
 
 if(BUILD_OUT_OF_TREE)
-	set_target_properties_plugin(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
+  set_target_properties_plugin(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
 else()
-	set_target_properties_obs(${PROJECT_NAME} PROPERTIES FOLDER "plugins/finitesingularity" PREFIX "")
+  set_target_properties_obs(${PROJECT_NAME} PROPERTIES FOLDER "plugins/finitesingularity" PREFIX "")
 endif()
