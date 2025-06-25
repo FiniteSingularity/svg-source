@@ -36,7 +36,7 @@ public:
 	static uint32_t GetWidth(void *data);
 	static uint32_t GetHeight(void *data);
 	static obs_properties_t *GetProperties(void *data);
-	static void GetDefaults(obs_data_t *settings, uint32_t w, uint32_t h);
+	static void GetDefaults(obs_data_t *settings);
 
 	static bool ScaleByChanged(obs_properties_t *props,
 				   obs_property_t *property,

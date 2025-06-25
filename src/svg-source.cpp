@@ -44,22 +44,7 @@ void SVGSource::Update(void *data, obs_data_t *settings)
 {
 	auto &instance = *static_cast<SVGSource *>(data);
 
-	uint32_t w = obs_source_get_width(instance.source_);
-	uint32_t h = obs_source_get_height(instance.source_);
-
-	if (w > 0) {
-		obs_data_set_int(settings, "source_width", w);
-	} else {
-		w = (uint32_t)obs_data_get_int(settings, "source_width");
-	}
-
-	if (h > 0) {
-		obs_data_set_int(settings, "source_height", h);
-	} else {
-		h = (uint32_t)obs_data_get_int(settings, "source_height");
-	}
-
-	SVGSource::GetDefaults(settings, w, h);
+	SVGSource::GetDefaults(settings);
 
 	const char *svgImagePath = obs_data_get_string(settings, "svg_image");
 	const char *svgText = obs_data_get_string(settings, "svg_text");
@@ -267,7 +252,8 @@ obs_properties_t *SVGSource::GetProperties(void *data)
 				 obs_module_text("SvgSource.Advanced"),
 				 OBS_GROUP_NORMAL, svg_advanced_group);
 
-	std::string info = "<a href=\"https://github.com/finitesingularity/svg-source/\">SVG Source</a> (";
+	std::string info =
+		"<a href=\"https://github.com/finitesingularity/svg-source/\">SVG Source</a> (";
 	info += PLUGIN_VERSION;
 	info += ") by <a href=\"https://twitch.tv/finitesingularity\">FiniteSingularity</a>";
 
@@ -277,7 +263,7 @@ obs_properties_t *SVGSource::GetProperties(void *data)
 	return props;
 }
 
-void SVGSource::GetDefaults(obs_data_t *settings, uint32_t w, uint32_t h)
+void SVGSource::GetDefaults(obs_data_t *settings)
 {
 
 	struct obs_video_info info;
@@ -285,8 +271,7 @@ void SVGSource::GetDefaults(obs_data_t *settings, uint32_t w, uint32_t h)
 	uint32_t size = (std::min)(info.base_width, info.base_height);
 	obs_data_set_default_int(settings, "svg_width", size);
 	obs_data_set_default_int(settings, "svg_height", size);
-	obs_data_set_default_int(settings, "svg_max_texture_size",
-				 2 * size);
+	obs_data_set_default_int(settings, "svg_max_texture_size", 2 * size);
 	obs_data_set_default_int(settings, "svg_input_type",
 				 SVG_INPUT_TYPE_FILE);
 }
