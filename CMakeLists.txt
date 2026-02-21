@@ -15,6 +15,8 @@ include(helpers)
 
 add_library(${PROJECT_NAME} MODULE)
 
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/svg-source-support.c.in" "${CMAKE_CURRENT_SOURCE_DIR}/src/svg-source-support.c")
+
 target_link_libraries(${PROJECT_NAME} PRIVATE OBS::libobs)
 
 if(BUILD_OUT_OF_TREE)
@@ -50,7 +52,8 @@ target_sources(
           src/svg-source.cpp
           src/svg-source.hpp
           src/svg-utils.cpp
-          src/svg-utils.hpp)
+          src/svg-utils.hpp
+          src/svg-source-support.c)
 
 if(BUILD_OUT_OF_TREE)
   set_target_properties_plugin(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
