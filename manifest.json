@@ -1,0 +1,16 @@
+{
+    "display_name": "SVG Source",
+    "id": "9098b818-8b68-4924-a61c-06bdf942d1a8",
+    "version": "1.1.0",
+    "authors": ["FiniteSingularity"],
+    "name": "svg-source",
+    "description": "A SVG source plugin for OBS.",
+    "long_description": "A plugin that provides a SVG source for OBS.",
+    "urls": {
+        "repository": "https://github.com/FiniteSingularity/svg-source",
+        "website": "https://f15y.com",
+        "support": "https://github.com/FiniteSingularity/svg-source/issues"
+    },
+    "has_banner": false,
+    "has_icon": false
+}
