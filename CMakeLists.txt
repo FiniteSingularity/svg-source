@@ -43,6 +43,7 @@ target_sources(
     src/svg-source.cpp
     src/svg-source.hpp
     src/svg-utils.cpp
-    src/svg-utils.hpp)
+    src/svg-utils.hpp
+)
 
 set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
