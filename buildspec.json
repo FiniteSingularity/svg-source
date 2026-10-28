@@ -37,16 +37,9 @@
         }
     },
     "name": "svg-source",
-    "displayName": "An SVG Source plugin for OBS",
-    "versionMajor": 1,
-    "versionMinor": 0,
-    "versionPatch": 0,
-    "buildNumber": 0,
-    "releaseType": "alpha",
+    "displayName": "SVG Source plugin for OBS",
+    "version": "1.1.0",
     "author": "FiniteSingularity",
     "website": "https://f15y.com",
-    "email": "finitesingularityttv@gmail.com",
-    "uuids": {
-        "windowsApp": "c2fc643e-0762-42b8-bf0b-f401cd392688"
-    }
+    "email": "finitesingularityttv@gmail.com"
 }

@@ -25,8 +25,8 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment**
  - OS/Version: [e.g. Windows 11]
- - OBS Version: [e.g. 29.1.2]
- - Quick Access Utility Plugin Version: [e.g. 0.0.1-alpha]
+ - OBS Version: [e.g. 30.0.0]
+ - SVG Source Plugin Version: [e.g. 1.1.0]
  - Dock Type [e.g. Dynamic or Manual]
 
 **GPU**
