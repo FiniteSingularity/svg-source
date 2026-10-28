@@ -55,8 +55,8 @@ function(set_target_properties_plugin target)
     OPTIONAL
   )
 
-  if(TARGET plugin-support)
-    target_link_libraries(${target} PRIVATE plugin-support)
+  if(TARGET svg-source-support)
+    target_link_libraries(${target} PRIVATE svg-source-support)
   endif()
 
   add_custom_command(
